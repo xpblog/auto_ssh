@@ -22,7 +22,7 @@ def ssh_connect(host, username, password, domain):
         print(f"SSH连接成功。")
         # 执行命令
         #stdin, stdout, stderr = client.exec_command('domains/{domain}/public_html/data/test.sh')
-        stdin, stdout, stderr = client.exec_command('domains/{domain}/public_html/data/test.sh')
+        stdin, stdout, stderr = client.exec_command('ls -l')
 
         # 获取命令执行结果
         result = stdout.read()
