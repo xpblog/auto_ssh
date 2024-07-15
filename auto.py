@@ -6,6 +6,7 @@ import requests
 ##
 # 从环境变量中读取 ACCOUNTS_JSON
 accounts_json = os.getenv('ACCOUNTS')
+print(str(accounts_json))
 accounts = json.loads(accounts_json)
 
 # 尝试通过SSH连接的函数
