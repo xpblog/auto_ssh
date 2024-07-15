@@ -10,7 +10,7 @@ print(str(accounts_json))
 accounts = json.loads(accounts_json)
 
 # 尝试通过SSH连接的函数
-def ssh_connect(host, username, password):
+def ssh_connect(host, username, password, domain):
     transport = None
     try:
         # 创建SSH客户端
@@ -21,7 +21,7 @@ def ssh_connect(host, username, password):
         client.connect(host, port=22, username=username, password=password)
         print(f"SSH连接成功。")
         # 执行命令
-        stdin, stdout, stderr = client.exec_command('ls -l')
+        stdin, stdout, stderr = client.exec_command('./home/xpblog/domains/{domain}/public_html/data/test.sh')
         # 获取命令执行结果
         result = stdout.read()
         print(result.decode())
@@ -34,4 +34,4 @@ def ssh_connect(host, username, password):
 
 # 循环执行任务
 for account in accounts:
-    ssh_connect(account['host'], account['username'], account['password'])
+    ssh_connect(account['host'], account['username'], account['password'], account['domian'])
