@@ -21,7 +21,9 @@ def ssh_connect(host, username, password, domain):
         client.connect(host, port=22, username=username, password=password)
         print(f"SSH连接成功。")
         # 执行命令
+        #stdin, stdout, stderr = client.exec_command('domains/{domain}/public_html/data/test.sh')
         stdin, stdout, stderr = client.exec_command('domains/{domain}/public_html/data/test.sh')
+
         # 获取命令执行结果
         result = stdout.read()
         print(result.decode())
