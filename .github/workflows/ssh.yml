@@ -27,4 +27,4 @@ jobs:
       - name: Run SSH connection script
         env:
           ACCOUNTS: ${{ secrets.ACCOUNTS }}
-        run: python ssh.py
+        run: python auto.py
