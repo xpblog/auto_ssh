@@ -13,12 +13,16 @@ accounts = json.loads(accounts_json)
 def ssh_connect(host, username, password):
     transport = None
     try:
-        transport = paramiko.Transport((host, 22))
-        transport.connect(username=username, password=password)
-        ssh_status = "SSH连接成功"
+        # 创建SSH客户端
+        client = paramiko.SSHClient()
+        # 自动添加未知的服务器密钥及策略
+        client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        # 连接SSH服务端
+        client.connect(host, port=22, username=username, password=password)
         print(f"SSH连接成功。")
-        
-        stdin, stdout, stderr = transport.exec_command('ls -l')
+        # 执行命令
+        stdin, stdout, stderr = client.exec_command('ls -l')
+        # 获取命令执行结果
         result = stdout.read()
         print(result.decode())
     except Exception as e:
